@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	font-family: Comic Sans MS, Comic Sans, cursive;
+}
+.sidenav {
+	overflow: hidden;
+	background-color: #333;
+	border-radius: 15px;
+}
+.sidenav a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	padding: 20px 20px;
+	text-decoration: none;
+}
+.sidenav a:hover {
+	background-color: #ddd;
+	color:black;
+}
+input:hover[type=submit] {
+	background-color: #ddd;
+	color: black;
+}
+input[type=submit] {
+	background-color: #333;
+	border: none;
+	color: white;
+	padding: 20px 20px;
+	text-decoration: none;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+.header {
+    text-align: center;
+    padding: 30px;	 
+}
+.header h1 {
+	font-size: 50px;
+}
+.center {
+	margin: auto;
+	width: 70%;
+}
+.center-text {
+	text-align: center;
+}
+footer {
+    border-radius: 15px;
+    padding: 8px;
+    text-align: center;
+    background: #333;
+    margin-top: 50px; 	 
+}
+footer h2 {
+	color:#f2f2f2;
+}
+.box {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    resize: both;
+}
+</style>
+</head>
+
+<body>
+<div class="header">
+	<p><img style="border-radius:15px; width: 65%;" src="https://lh3.googleusercontent.com/proxy/y27djYxJaHewasHzsjMeM4srzeWov0lODsJ5Z0xplAckeE-vi3aty4_P6e0BStSEt0z2ZmFUdn-cHHfDRHDNA1CX5q9jyn0MxjXDTzWiunUjlo3HnGWgcVU" /></p>
+	<h1> Rate My UNO</h1>
+</div>
+
+<div class="sidenav">
+	<a href="/webproject/search_by_course.html">Search by Course</a>
+	<a href="/webproject/search_by_prof.html">Search by Professor</a>
+</div>
+
+<div class="center">
+	<div class="center-text">
+		<h1>Search by Course</h1>
+		<form action="DisplayCourses" method="POST">
+			Course Number: <input class="box" type="text" name="course">
+			<input type="submit" value="Submit" />
+		</form>
+	</div>
+</div>
+
+<footer>
+	<h2>UNO College of IS&T @2020</h2>
+</footer>
+</body>
+</html>
