@@ -99,7 +99,7 @@ public class DisplayProfessors extends HttpServlet implements Info {
             + "</head>\n" + //
             "<body>"
             + "<div class=\"header\">\n" + 
-            "	<p><img style=\"border-radius:15px; width: 65%;\" src=\"https://lh3.googleusercontent.com/proxy/y27djYxJaHewasHzsjMeM4srzeWov0lODsJ5Z0xplAckeE-vi3aty4_P6e0BStSEt0z2ZmFUdn-cHHfDRHDNA1CX5q9jyn0MxjXDTzWiunUjlo3HnGWgcVU\" /></p>\n" + 
+            "	<p><img style=\"border-radius:15px; width: 65%;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuV09DoGvtw4VPJ2fwejRf0B9FTpop3zfDDvxllb--U2U9MSZl&usqp=CAU\" /></p>\n" + 
             "	<h1> Rate My UNO</h1>\n" + 
             "</div>\n" + 
             "\n" + 
@@ -109,18 +109,23 @@ public class DisplayProfessors extends HttpServlet implements Info {
             "</div>"
             + "<div class=\"center\">");
 
-      List<Data> listData = UtilDB.listData();
-      if (prof != null && !prof.isEmpty()) {
-	      listData = UtilDB.listData(prof);
-	   } else {
-	      listData = UtilDB.listData();
-	   }
+      List<Data> listData = getData(prof);
       display(listData, out);
       out.println("</div><footer>\n" + 
       		"	<h2>UNO College of IS&T @2020</h2>\n" + 
       		"</footer>\n" + 
       		"</body>\n" + 
       		"</html>");
+   }
+   
+   List<Data> getData(String prof) {
+	   List<Data> listData = UtilDB.listData();
+	   if (prof != null && !prof.isEmpty()) {
+	      listData = UtilDB.listData(prof);
+	   } else {
+	      listData = UtilDB.listData();
+	   }
+	   return listData;
    }
 
    void display(List<Data> listData, PrintWriter out) {

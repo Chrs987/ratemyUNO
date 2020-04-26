@@ -101,7 +101,7 @@ public class AddedReview extends HttpServlet implements Info {
               + "</head>\n" + //
               "<body>"
               + "<div class=\"header\">\n" + 
-              "	<p><img style=\"border-radius:15px; width: 65%;\" src=\"https://lh3.googleusercontent.com/proxy/y27djYxJaHewasHzsjMeM4srzeWov0lODsJ5Z0xplAckeE-vi3aty4_P6e0BStSEt0z2ZmFUdn-cHHfDRHDNA1CX5q9jyn0MxjXDTzWiunUjlo3HnGWgcVU\" /></p>\n" + 
+              "	<p><img style=\"border-radius:15px; width: 65%;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuV09DoGvtw4VPJ2fwejRf0B9FTpop3zfDDvxllb--U2U9MSZl&usqp=CAU\" /></p>\n" + 
               "	<h1> Rate My UNO</h1>\n" + 
               "</div>\n" + 
               "\n" + 

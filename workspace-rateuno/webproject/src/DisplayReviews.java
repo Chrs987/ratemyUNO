@@ -29,6 +29,8 @@ public class DisplayReviews extends HttpServlet implements Info {
       SimpleDateFormat f = new SimpleDateFormat("MM/dd/yyyy");  
       Date d = new Date(); 
       String date = f.format(d);
+      List<Reviews> reviews = getReviews(data_id);
+      Data course = getCourse(data_id);
 
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
@@ -119,7 +121,7 @@ public class DisplayReviews extends HttpServlet implements Info {
               + "</head>\n" + //
               "<body>"
               + "<div class=\"header\">\n" + 
-              "	<p><img style=\"border-radius:15px; width: 65%;\" src=\"https://lh3.googleusercontent.com/proxy/y27djYxJaHewasHzsjMeM4srzeWov0lODsJ5Z0xplAckeE-vi3aty4_P6e0BStSEt0z2ZmFUdn-cHHfDRHDNA1CX5q9jyn0MxjXDTzWiunUjlo3HnGWgcVU\" /></p>\n" + 
+              "	<p><img style=\"border-radius:15px; width: 65%;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuV09DoGvtw4VPJ2fwejRf0B9FTpop3zfDDvxllb--U2U9MSZl&usqp=CAU\" /></p>\n" + 
               "	<h1> Rate My UNO</h1>\n" + 
               "</div>\n" + 
               "\n" + 
@@ -129,28 +131,34 @@ public class DisplayReviews extends HttpServlet implements Info {
               "</div>"
               + "<div class=\"center\">");
 
-      List<Reviews> reviews = UtilDB.listReviews();
-      if (data_id != null && data_id != 0) {
-    	  reviews = UtilDB.listReviews(data_id);
-	  } else {
-		   reviews = UtilDB.listReviews();
-	  }
-      
-      Data course = new Data();
-      if (data_id != null && data_id != 0) {
-    	  course = UtilDB.getCourse(data_id);
-      }
-      
       courseDesc(course, reviews, out, date);
+      
       out.println("</div><footer>\n" + 
       		"	<h2>UNO College of IS&T @2020</h2>\n" + 
       		"</footer>\n" + 
       		"</body>\n" + 
       		"</html>");
    }
-
-   void courseDesc(Data course, List<Reviews> reviews, PrintWriter out, String date) {
-	   
+   
+   List<Reviews> getReviews(Integer data_id) {
+	   List<Reviews> reviews = UtilDB.listReviews();
+	   if (data_id != null && data_id != 0) {
+		   reviews = UtilDB.listReviews(data_id);
+	   } else {
+		   reviews = UtilDB.listReviews();
+	   }
+	   return reviews;
+   }
+   
+   Data getCourse(Integer data_id) {
+	   Data course = new Data();
+	   if (data_id != null && data_id != 0) {
+		   course = UtilDB.getCourse(data_id);
+	   }
+	   return course;
+   }
+   
+   double getOverallRating(List<Reviews> reviews) {
 	   double overall = 0;
 	   int counter = 0;
 	   for (Reviews review : reviews) {
@@ -158,9 +166,18 @@ public class DisplayReviews extends HttpServlet implements Info {
 		   overall += review.getRating();
 	   }
 	   
-	   overall /= counter;
-	   DecimalFormat df = new DecimalFormat("#.##");
-	   overall = Double.valueOf(df.format(overall));
+	   if (counter != 0 && overall != 0)
+	   {
+		   overall /= counter;
+		   DecimalFormat df = new DecimalFormat("#.##");
+		   overall = Double.valueOf(df.format(overall));
+	   }
+	   return overall;
+   }
+
+   void courseDesc(Data course, List<Reviews> reviews, PrintWriter out, String date) {
+	   
+	  double overall = getOverallRating(reviews);
 	   
 	  System.out.println("[DBG] " + course.getProfessor() + ", " + course.getCourse() + ", " + course.getData_id());
 	  out.println("<h2>Course: " + course.getCourse() + "</h2>"
@@ -192,6 +209,9 @@ public class DisplayReviews extends HttpServlet implements Info {
 		   		+ "</form>");
 	   
 	   out.println("<h2>Student Reviews</h2>");
+	   if (reviews.size() < 1) {
+		   out.println("There are no reviews for this course and professor.");
+	   }
 	   for (Reviews review : reviews) {
 		   out.println("<div class=\"entry\">"
 				+ "<p style=\"float:right;\">" + review.getDate() + "</p>"
